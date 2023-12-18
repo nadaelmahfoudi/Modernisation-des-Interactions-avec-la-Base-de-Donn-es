@@ -1,12 +1,17 @@
-<?php 
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'task_db';
+<?php
+class Config {
+    public static function getPdo() {
+        $serveur = 'localhost';
+        $utilisateur = 'root';
+        $motDePasse = '';
+        $nomBDD = 'task_db';
 
-try {
-    $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
+        try {
+            $pdo = new PDO("mysql:host=$serveur;dbname=$nomBDD;charset=utf8mb4", $utilisateur, $motDePasse);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $pdo;
+        } catch (PDOException $e) {
+            die("Échec de la connexion : " . $e->getMessage());
+        }
+    }
 }

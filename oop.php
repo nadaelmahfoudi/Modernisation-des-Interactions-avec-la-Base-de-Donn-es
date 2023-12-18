@@ -4,16 +4,16 @@ require 'connection.php';
 class DatabaseHandler {
     private $pdo;
 
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+    public function __construct() {
+        $this->pdo = Config::getPdo();
     }
 
     public function insertRecord($table, $data) {
-        // Use prepared statements to prevent SQL injection
-        $columns = implode(',', array_keys($data));
-        $values = implode(',', array_fill(0, count($data), '?'));
+        // Utiliser des déclarations préparées pour éviter les injections SQL
+        $colonnes = implode(',', array_keys($data));
+        $valeurs = implode(',', array_fill(0, count($data), '?'));
 
-        $sql = "INSERT INTO $table($columns) VALUES($values)";
+        $sql = "INSERT INTO $table($colonnes) VALUES($valeurs)";
 
         try {
             $stmt = $this->pdo->prepare($sql);
@@ -21,27 +21,27 @@ class DatabaseHandler {
 
             return true;
         } catch (PDOException $e) {
-            die("Error in prepared statement: " . $e->getMessage());
+            die("Erreur dans la déclaration préparée : " . $e->getMessage());
         }
     }
 }
 
 // Example Usage:
-// $databaseHandler = new DatabaseHandler($pdo);
+// $databaseHandler = new DatabaseHandler();
 
-// $data = ['name' => 'Nada', 'age' => 20];
+// $data = ['name' => 'Malak', 'age' => 19];
 // $result = $databaseHandler->insertRecord('users', $data);
 
 // if ($result) {
-//     echo "Record inserted successfully!";
+//     echo "Enregistrement inséré avec succès !";
 // } else {
-//     echo "Error inserting record.";
+//     echo "Erreur lors de l'insertion de l'enregistrement.";
 // }
-class DatabaseHandler2{
+class DatabaseHandler2 {
     private $pdo;
 
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
+    public function __construct() {
+        $this->pdo = Config::getPdo();
     }
 
     public function updateRecord($table, $data, $id) {
@@ -54,7 +54,8 @@ class DatabaseHandler2{
 
         try {
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute(array_merge(array_values($data), [$id]));
+            $params = array_merge(array_values($data), [$id]);
+            $stmt->execute($params);
 
             // Get the result (number of affected rows)
             $result = $stmt->rowCount();
@@ -67,7 +68,7 @@ class DatabaseHandler2{
 }
 
 // Example Usage:
-// $databaseHandler = new DatabaseHandler2($pdo);
+// $databaseHandler = new DatabaseHandler2();
 
 // $dataToUpdate = ['name' => 'Laila', 'age' => 25];
 // $idToUpdate = 4;
@@ -82,14 +83,13 @@ class DatabaseHandler2{
 
 
 
-// fonction pour la suppression
-class DatabaseHandler3{
-    private $pdo;
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
-    }
 
-    
+class DatabaseHandler3 {
+    private $pdo;
+
+    public function __construct() {
+        $this->pdo = Config::getPdo();
+    }
 
     public function deleteRecord($table, $id) {
         // Use prepared statements to prevent SQL injection
@@ -108,7 +108,7 @@ class DatabaseHandler3{
 }
 
 // Example Usage:
-// $databaseHandler = new DatabaseHandler3($pdo);
+// $databaseHandler = new DatabaseHandler3();
 
 // $idToDelete = 6;
 
@@ -121,14 +121,13 @@ class DatabaseHandler3{
 // }
 
 
-// fonction pour l'affichage
-class DatabaseHandler4{
+
+class DatabaseHandler4 {
     private $pdo;
 
-    public function __construct ($pdo){
-        $this->pdp = $pdo;
+    public function __construct() {
+        $this->pdo = Config::getPdo();
     }
-    
 
     public function selectRecords($table, $columns = "*", $where = null) {
         // Use prepared statements to prevent SQL injection
@@ -161,6 +160,7 @@ class DatabaseHandler4{
 // foreach ($result as $row) {
 //     print_r($row);
 // }
+
 
 
 
