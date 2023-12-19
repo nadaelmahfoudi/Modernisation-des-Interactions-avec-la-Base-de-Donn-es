@@ -19,7 +19,7 @@ require 'Affichage.php';
 // Example Usage:
 // $databaseHandler = new Modification();
 
-// $dataToUpdate = ['name' => 'Laila', 'age' => 25];
+// $dataToUpdate = ['name' => 'Fati', 'age' => 25];
 // $idToUpdate = 4;
 
 // $result = $databaseHandler->updateRecord('users', $dataToUpdate, $idToUpdate);
@@ -46,11 +46,11 @@ require 'Affichage.php';
 
 
 // Example Usage:
-// $databaseHandler = new Affichage();
+$databaseHandler = new Affichage();
 
-// $result = $databaseHandler->selectRecords('users', 'id, name, age');
+$result = $databaseHandler->selectRecords('users', 'id, name, age');
 
-// // Example: Fetch data from the result set
-// foreach ($result as $row) {
-//     print_r($row);
-// }
+// Example: Fetch data from the result set
+foreach ($result as $row) {
+    print_r($row);
+}

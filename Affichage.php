@@ -1,13 +1,12 @@
-<?php 
+<?php
 require_once 'Config.php';
 
-class Affichage{
+class Affichage {
     private $pdo;
 
-    public function __construct ($pdo){
-        $this->pdp = $pdo;
+    public function __construct() {
+        $this->pdo = Config::getPdo();
     }
-    
 
     public function selectRecords($table, $columns = "*", $where = null) {
         // Use prepared statements to prevent SQL injection
