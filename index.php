@@ -1,28 +1,25 @@
 <?php
-require 'Insertion.php';
-require 'Modification.php';
-require 'Suppression.php';
-require 'Affichage.php';
+require 'SimpleORM.php';
 
 // Example Usage:
-// $Insertion = new Insertion();
+// $orm = new ORM();
 
-// $data = ['name' => 'Mehdi', 'age' => 19];
-// $result = $Insertion->insertRecord('users', $data);
+// $data = ['name' => 'Nada', 'age' => 30];
+// $result = $orm->insertRecord('users', $data);
 
 // if ($result) {
-//     echo "Enregistrement inséré avec succès !";
+//     echo "Record inserted successfully!";
 // } else {
-//     echo "Erreur lors de l'insertion de l'enregistrement.";
+//     echo "Error inserting record.";
 // }
 
+
 // Example Usage:
-// $databaseHandler = new Modification();
+// $orm = new ORM();
+// $dataToUpdate = ['name' => 'Nada', 'age' => 30];
+// $idToUpdate = 11;
 
-// $dataToUpdate = ['name' => 'Fati', 'age' => 25];
-// $idToUpdate = 4;
-
-// $result = $databaseHandler->updateRecord('users', $dataToUpdate, $idToUpdate);
+// $result = $orm->updateRecord('users', $dataToUpdate, $idToUpdate);
 
 // if ($result) {
 //     echo "Record updated successfully!";
@@ -31,26 +28,27 @@ require 'Affichage.php';
 // }
 
 
-// Example Usage:
-// $databaseHandler = new Suppression();
-
-// $idToDelete = 6;
-
-// $result = $databaseHandler->deleteRecord('users', $idToDelete);
-
-// if ($result) {
-//     echo "Record deleted successfully!";
-// } else {
-//     echo "Error deleting record.";
-// }
 
 
-// Example Usage:
-$databaseHandler = new Affichage();
+// Example Usage 
+    // $orm = new ORM();
 
-$result = $databaseHandler->selectRecords('users', 'id, name, age');
-
-// Example: Fetch data from the result set
-foreach ($result as $row) {
-    print_r($row);
-}
+    // $idToDelete = 11;
+    // $result = $orm->deleteRecord('users', $idToDelete);
+    
+    // if ($result) {
+    //     echo "Record deleted successfully!";
+    // } else {
+    //     echo "Error deleting record.";
+    // }
+    
+// Example Usage
+    $orm = new ORM();
+    
+    $columnsToSelect = 'id, name, age';
+    
+    $result = $orm->selectRecords('users', $columnsToSelect);
+    
+    foreach ($result as $row) {
+        print_r($row);
+    }
